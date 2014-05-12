@@ -14,6 +14,9 @@ def index():
 @app.route("/", methods=['POST'])
 def add_url():
     url = request.form['url']
+    if url[:7] != "http://":
+        url = "http://" + url
+
     try:
         REQ.get(url)
     except REQ.exceptions.MissingSchema, e:
